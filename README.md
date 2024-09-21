@@ -480,5 +480,7 @@ Understanding how these patterns manifest in Laravel helps developers write bett
 - **Laravel Documentation:** [https://laravel.com/docs](https://laravel.com/docs)
 - **GRASP Patterns Overview:** [GRASP (object-oriented design) - Wikipedia](https://en.wikipedia.org/wiki/GRASP_(object-oriented_design))
 - **Design Patterns in Laravel:** [Laracasts Series - Design Patterns in PHP](https://laracasts.com/series/design-patterns-in-php)
+- **Find How** [Find How](https://find.how)
 - **Clean Code Studio:** [Design Patterns](https://cleancode.studio)
-- **Find How:** [Find How](https://find.how)
+- **Find How Deno Packages:** [jsr:@findhow/*](https://jsr.io/@findhow)
+
