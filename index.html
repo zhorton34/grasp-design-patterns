@@ -1,559 +1,660 @@
-<h1 id="grasp-design-patterns-in-laravel-framework">GRASP Design patterns in Laravel framework</h1>
-<p>Here&#39;s a structured table of contents for the GRASP patterns in Laravel framework, complete with relative links to each section:</p>
-<hr>
-<h2 id="-grasp-patterns-in-laravel-framework-"><strong>GRASP Patterns in Laravel Framework</strong></h2>
-<table>
-<thead>
-<tr>
-<th>Pattern</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="#1-information-expert-expert">1. Information Expert</a></td>
-<td>Assign responsibilities to the class that has the necessary information to fulfill them.</td>
-</tr>
-<tr>
-<td><a href="#2-creator">2. Creator</a></td>
-<td>Assign the responsibility of creating an instance of class A to class B if B contains or closely uses A.</td>
-</tr>
-<tr>
-<td><a href="#3-controller">3. Controller</a></td>
-<td>Assign the responsibility of handling a system event to a class representing the overall system or a use case scenario.</td>
-</tr>
-<tr>
-<td><a href="#4-low-coupling">4. Low Coupling</a></td>
-<td>Assign responsibilities to minimize dependencies between classes, reducing the impact of changes and promoting reuse.</td>
-</tr>
-<tr>
-<td><a href="#5-high-cohesion">5. High Cohesion</a></td>
-<td>Assign responsibilities so that related behaviors are kept together, promoting focused and manageable classes.</td>
-</tr>
-<tr>
-<td><a href="#6-polymorphism">6. Polymorphism</a></td>
-<td>Assign responsibility for behavior to the appropriate object based on its type.</td>
-</tr>
-<tr>
-<td><a href="#7-pure-fabrication">7. Pure Fabrication</a></td>
-<td>Assign responsibilities to classes that are not part of the problem domain to achieve low coupling and high cohesion.</td>
-</tr>
-<tr>
-<td><a href="#8-indirection">8. Indirection</a></td>
-<td>Assign responsibilities to intermediate objects to mediate between other components.</td>
-</tr>
-<tr>
-<td><a href="#9-protected-variations">9. Protected Variations</a></td>
-<td>Design to protect elements from variations in other elements by encapsulating the concept that varies.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="-grasp-patterns-in-laravel-framework-"><strong>GRASP Patterns in Laravel Framework</strong></h2>
-<h3 id="-1-information-expert-expert-"><strong>1. Information Expert (Expert)</strong></h3>
-<ul>
-<li><p><strong>Definition:</strong> Assign responsibilities to the class that has the necessary information to fulfill them.</p>
-</li>
-<li><p><strong>Laravel Example:</strong> <strong>Eloquent Models</strong></p>
-<ul>
-<li><p><strong>Description:</strong></p>
-<ul>
-<li>Eloquent models in Laravel act as the primary information experts. They encapsulate the data and provide methods to interact with the database, such as retrieving, updating, and deleting records.</li>
-</ul>
-</li>
-<li><p><strong>Example:</strong></p>
-<pre><code class="lang-php"><span class="hljs-comment">// app/Models/User.php</span>
-<span class="hljs-keyword">namespace</span> <span class="hljs-title">App</span>\<span class="hljs-title">Models</span>;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GRASP Design Patterns in Laravel Framework</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            overflow-x: auto;
+            border-radius: 5px;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            color: #c7254e;
+            background-color: #f9f2f4;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        hr {
+            margin: 40px 0;
+            border: none;
+            border-top: 1px solid #eee;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        ul {
+            margin-bottom: 20px;
+        }
+        strong {
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="grasp-design-patterns-in-laravel-framework">GRASP Design patterns in Laravel framework</h1>
+    <p>Here's a structured table of contents for the GRASP patterns in Laravel framework, complete with relative links to each section:</p>
+    <hr>
+    <h2 id="-grasp-patterns-in-laravel-framework-"><strong>GRASP Patterns in Laravel Framework</strong></h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Pattern</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="#1-information-expert-expert">1. Information Expert</a></td>
+                <td>Assign responsibilities to the class that has the necessary information to fulfill them.</td>
+            </tr>
+            <tr>
+                <td><a href="#2-creator">2. Creator</a></td>
+                <td>Assign the responsibility of creating an instance of class A to class B if B contains or closely uses A.</td>
+            </tr>
+            <tr>
+                <td><a href="#3-controller">3. Controller</a></td>
+                <td>Assign the responsibility of handling a system event to a class representing the overall system or a use case scenario.</td>
+            </tr>
+            <tr>
+                <td><a href="#4-low-coupling">4. Low Coupling</a></td>
+                <td>Assign responsibilities to minimize dependencies between classes, reducing the impact of changes and promoting reuse.</td>
+            </tr>
+            <tr>
+                <td><a href="#5-high-cohesion">5. High Cohesion</a></td>
+                <td>Assign responsibilities so that related behaviors are kept together, promoting focused and manageable classes.</td>
+            </tr>
+            <tr>
+                <td><a href="#6-polymorphism">6. Polymorphism</a></td>
+                <td>Assign responsibility for behavior to the appropriate object based on its type.</td>
+            </tr>
+            <tr>
+                <td><a href="#7-pure-fabrication">7. Pure Fabrication</a></td>
+                <td>Assign responsibilities to classes that are not part of the problem domain to achieve low coupling and high cohesion.</td>
+            </tr>
+            <tr>
+                <td><a href="#8-indirection">8. Indirection</a></td>
+                <td>Assign responsibilities to intermediate objects to mediate between other components.</td>
+            </tr>
+            <tr>
+                <td><a href="#9-protected-variations">9. Protected Variations</a></td>
+                <td>Design to protect elements from variations in other elements by encapsulating the concept that varies.</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <h2 id="-grasp-patterns-in-laravel-framework-"><strong>GRASP Patterns in Laravel Framework</strong></h2>
 
-<span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Database</span>\<span class="hljs-title">Eloquent</span>\<span class="hljs-title">Model</span>;
+    <h3 id="-1-information-expert-expert-"><strong>1. Information Expert (Expert)</strong></h3>
+    <ul>
+        <li>
+            <p><strong>Definition:</strong> Assign responsibilities to the class that has the necessary information to fulfill them.</p>
+        </li>
+        <li>
+            <p><strong>Laravel Example:</strong> <strong>Eloquent Models</strong></p>
+            <ul>
+                <li>
+                    <p><strong>Description:</strong></p>
+                    <ul>
+                        <li>Eloquent models in Laravel act as the primary information experts. They encapsulate the data and provide methods to interact with the database, such as retrieving, updating, and deleting records.</li>
+                    </ul>
+                </li>
+                <li>
+                    <p><strong>Example:</strong></p>
+                    <pre><code class="lang-php">// app/Models/User.php
+namespace App\Models;
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Model</span>
-</span>{
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">orders</span><span class="hljs-params">()</span>
-    </span>{
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">$this</span>-&gt;hasMany(Order::class);
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model
+{
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }
 
-<span class="hljs-comment">// Usage in a controller or elsewhere</span>
-$user = User::find(<span class="hljs-number">1</span>);
-$orders = $user-&gt;orders; <span class="hljs-comment">// User model knows how to retrieve its orders</span>
+// Usage in a controller or elsewhere
+$user = User::find(1);
+$orders = $user->orders; // User model knows how to retrieve its orders
 </code></pre>
-</li>
-<li><p><strong>Explanation:</strong></p>
-<ul>
-<li>The <code>User</code> model is responsible for accessing its related <code>Order</code> models because it possesses the necessary information about the relationship. By assigning this responsibility to the <code>User</code> model, we adhere to the Information Expert principle.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="-2-creator-"><strong>2. Creator</strong></h3>
-<ul>
-<li><p><strong>Definition:</strong> Assign the responsibility of creating an instance of class A to class B if B contains or closely uses A, has the data required to initialize A, or aggregates A.</p>
-</li>
-<li><p><strong>Laravel Example:</strong> <strong>Model Factories and Relationships</strong></p>
-<ul>
-<li><p><strong>Description:</strong></p>
-<ul>
-<li>Laravel uses factories to create model instances for testing and seeding databases. Additionally, models often create related models through relationships.</li>
-</ul>
-</li>
-<li><p><strong>Example (Factory):</strong></p>
-<pre><code class="lang-php"><span class="hljs-comment">// database/factories/UserFactory.php</span>
-<span class="hljs-keyword">use</span> <span class="hljs-title">App</span>\<span class="hljs-title">Models</span>\<span class="hljs-title">User</span>;
-<span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Database</span>\<span class="hljs-title">Eloquent</span>\<span class="hljs-title">Factories</span>\<span class="hljs-title">Factory</span>;
+                </li>
+                <li>
+                    <p><strong>Explanation:</strong></p>
+                    <ul>
+                        <li>The <code>User</code> model is responsible for accessing its related <code>Order</code> models because it possesses the necessary information about the relationship. By assigning this responsibility to the <code>User</code> model, we adhere to the Information Expert principle.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserFactory</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Factory</span>
-</span>{
-    <span class="hljs-keyword">protected</span> $model = User::class;
+    <h3 id="-2-creator-"><strong>2. Creator</strong></h3>
+    <ul>
+        <li>
+            <p><strong>Definition:</strong> Assign the responsibility of creating an instance of class A to class B if B contains or closely uses A, has the data required to initialize A, or aggregates A.</p>
+        </li>
+        <li>
+            <p><strong>Laravel Example:</strong> <strong>Model Factories and Relationships</strong></p>
+            <ul>
+                <li>
+                    <p><strong>Description:</strong></p>
+                    <ul>
+                        <li>Laravel uses factories to create model instances for testing and seeding databases. Additionally, models often create related models through relationships.</li>
+                    </ul>
+                </li>
+                <li>
+                    <p><strong>Example (Factory):</strong></p>
+                    <pre><code class="lang-php">// database/factories/UserFactory.php
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">definition</span><span class="hljs-params">()</span>
-    </span>{
-        <span class="hljs-keyword">return</span> [
-            <span class="hljs-string">'name'</span> =&gt; <span class="hljs-keyword">$this</span>-&gt;faker-&gt;name,
-            <span class="hljs-string">'email'</span> =&gt; <span class="hljs-keyword">$this</span>-&gt;faker-&gt;unique()-&gt;safeEmail,
-            <span class="hljs-comment">// ...</span>
+class UserFactory extends Factory
+{
+    protected $model = User::class;
+
+    public function definition()
+    {
+        return [
+            'name' => $this->faker->name,
+            'email' => $this->faker->unique()->safeEmail,
+            // ...
         ];
     }
 }
 
-<span class="hljs-comment">// Usage in tests or seeders</span>
-$user = User::factory()-&gt;create();
+// Usage in tests or seeders
+$user = User::factory()->create();
 </code></pre>
-</li>
-<li><p><strong>Example (Relationship):</strong></p>
-<pre><code class="lang-php"><span class="hljs-comment">// Creating an order for a user</span>
-$order = $user-&gt;orders()-&gt;create([
-    <span class="hljs-string">'order_number'</span> =&gt; <span class="hljs-string">'ORD123'</span>,
-    <span class="hljs-string">'total'</span> =&gt; <span class="hljs-number">99.99</span>,
+                </li>
+                <li>
+                    <p><strong>Example (Relationship):</strong></p>
+                    <pre><code class="lang-php">// Creating an order for a user
+$order = $user->orders()->create([
+    'order_number' => 'ORD123',
+    'total' => 99.99,
 ]);
 </code></pre>
-</li>
-<li><p><strong>Explanation:</strong></p>
-<ul>
-<li>In both cases, the class (<code>User</code> model) that has the necessary information or closely uses the other class (<code>Order</code> model) is responsible for creating it.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="-3-controller-"><strong>3. Controller</strong></h3>
-<ul>
-<li><p><strong>Definition:</strong> Assign the responsibility of handling a system event to a class representing the overall system or a use case scenario.</p>
-</li>
-<li><p><strong>Laravel Example:</strong> <strong>HTTP Controllers</strong></p>
-<ul>
-<li><p><strong>Description:</strong></p>
-<ul>
-<li>Laravel&#39;s controllers handle incoming HTTP requests, process user input, interact with models, and return responses.</li>
-</ul>
-</li>
-<li><p><strong>Example:</strong></p>
-<pre><code class="lang-php"><span class="hljs-comment">// app/Http/Controllers/PostController.php</span>
-<span class="hljs-keyword">namespace</span> <span class="hljs-title">App</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Controllers</span>;
+                </li>
+                <li>
+                    <p><strong>Explanation:</strong></p>
+                    <ul>
+                        <li>In both cases, the class (<code>User</code> model) that has the necessary information or closely uses the other class (<code>Order</code> model) is responsible for creating it.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
 
-<span class="hljs-keyword">use</span> <span class="hljs-title">App</span>\<span class="hljs-title">Models</span>\<span class="hljs-title">Post</span>;
-<span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Request</span>;
+    <h3 id="-3-controller-"><strong>3. Controller</strong></h3>
+    <ul>
+        <li>
+            <p><strong>Definition:</strong> Assign the responsibility of handling a system event to a class representing the overall system or a use case scenario.</p>
+        </li>
+        <li>
+            <p><strong>Laravel Example:</strong> <strong>HTTP Controllers</strong></p>
+            <ul>
+                <li>
+                    <p><strong>Description:</strong></p>
+                    <ul>
+                        <li>Laravel's controllers handle incoming HTTP requests, process user input, interact with models, and return responses.</li>
+                    </ul>
+                </li>
+                <li>
+                    <p><strong>Example:</strong></p>
+                    <pre><code class="lang-php">// app/Http/Controllers/PostController.php
+namespace App\Http\Controllers;
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PostController</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Controller</span>
-</span>{
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">store</span><span class="hljs-params">(Request $request)</span>
-    </span>{
-        $validated = $request-&gt;validate([
-            <span class="hljs-string">'title'</span> =&gt; <span class="hljs-string">'required'</span>,
-            <span class="hljs-string">'content'</span> =&gt; <span class="hljs-string">'required'</span>,
+use App\Models\Post;
+use Illuminate\Http\Request;
+
+class PostController extends Controller
+{
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => 'required',
+            'content' => 'required',
         ]);
 
         $post = Post::create($validated);
 
-        <span class="hljs-keyword">return</span> redirect()-&gt;route(<span class="hljs-string">'posts.show'</span>, $post);
+        return redirect()->route('posts.show', $post);
     }
 }
 </code></pre>
-</li>
-<li><p><strong>Explanation:</strong></p>
-<ul>
-<li>The <code>PostController</code> acts as a controller by managing user input, coordinating with models (<code>Post</code>), and determining the appropriate response.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="-4-low-coupling-"><strong>4. Low Coupling</strong></h3>
-<ul>
-<li><p><strong>Definition:</strong> Assign responsibilities to minimize dependencies between classes, reducing the impact of changes and promoting reuse.</p>
-</li>
-<li><p><strong>Laravel Example:</strong> <strong>Service Container and Dependency Injection</strong></p>
-<ul>
-<li><p><strong>Description:</strong></p>
-<ul>
-<li>Laravel&#39;s service container allows for dependency injection, enabling classes to depend on abstractions (interfaces) rather than concrete implementations.</li>
-</ul>
-</li>
-<li><p><strong>Example:</strong></p>
-<pre><code class="lang-php"><span class="hljs-comment">// app/Interfaces/PaymentGatewayInterface.php</span>
-<span class="hljs-keyword">namespace</span> <span class="hljs-title">App</span>\<span class="hljs-title">Interfaces</span>;
+                </li>
+                <li>
+                    <p><strong>Explanation:</strong></p>
+                    <ul>
+                        <li>The <code>PostController</code> acts as a controller by managing user input, coordinating with models (<code>Post</code>), and determining the appropriate response.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
 
-<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">PaymentGatewayInterface</span>
-</span>{
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">charge</span><span class="hljs-params">($amount)</span></span>;
-}
+    <h3 id="-4-low-coupling-"><strong>4. Low Coupling</strong></h3>
+    <ul>
+        <li>
+            <p><strong>Definition:</strong> Assign responsibilities to minimize dependencies between classes, reducing the impact of changes and promoting reuse.</p>
+        </li>
+        <li>
+            <p><strong>Laravel Example:</strong> <strong>Service Container and Dependency Injection</strong></p>
+            <ul>
+                <li>
+                    <p><strong>Description:</strong></p>
+                    <ul>
+                        <li>Laravel's service container allows for dependency injection, enabling classes to depend on abstractions (interfaces) rather than concrete implementations.</li>
+                    </ul>
+                </li>
+                <li>
+                    <p><strong>Example:</strong></p>
+                    <pre><code class="lang-php">// app/Interfaces/PaymentGatewayInterface.php
 
-<span class="hljs-comment">// app/Services/StripePaymentGateway.php</span>
-<span class="hljs-keyword">namespace</span> <span class="hljs-title">App</span>\<span class="hljs-title">Services</span>;
+// Usage
+use Illuminate\Contracts\Cache\Factory as CacheFactory;
 
-<span class="hljs-keyword">use</span> <span class="hljs-title">App</span>\<span class="hljs-title">Interfaces</span>\<span class="hljs-title">PaymentGatewayInterface</span>;
+class SomeClass
+{
+    protected $cache;
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StripePaymentGateway</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">PaymentGatewayInterface</span>
-</span>{
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">charge</span><span class="hljs-params">($amount)</span>
-    </span>{
-        <span class="hljs-comment">// Stripe charging logic</span>
-    }
-}
-
-<span class="hljs-comment">// app/Providers/AppServiceProvider.php</span>
-<span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">register</span><span class="hljs-params">()</span>
-</span>{
-    <span class="hljs-keyword">$this</span>-&gt;app-&gt;bind(PaymentGatewayInterface::class, StripePaymentGateway::class);
-}
-
-<span class="hljs-comment">// app/Http/Controllers/OrderController.php</span>
-<span class="hljs-keyword">namespace</span> <span class="hljs-title">App</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Controllers</span>;
-
-<span class="hljs-keyword">use</span> <span class="hljs-title">App</span>\<span class="hljs-title">Interfaces</span>\<span class="hljs-title">PaymentGatewayInterface</span>;
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OrderController</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Controller</span>
-</span>{
-    <span class="hljs-keyword">protected</span> $paymentGateway;
-
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span><span class="hljs-params">(PaymentGatewayInterface $paymentGateway)</span>
-    </span>{
-        <span class="hljs-keyword">$this</span>-&gt;paymentGateway = $paymentGateway;
+    public function __construct(CacheFactory $cache)
+    {
+        $this->cache = $cache;
     }
 
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">store</span><span class="hljs-params">()</span>
-    </span>{
-        <span class="hljs-keyword">$this</span>-&gt;paymentGateway-&gt;charge(<span class="hljs-number">100</span>);
-        <span class="hljs-comment">// ...</span>
+    public function getData()
+    {
+        return $this->cache->get('key');
     }
 }
 </code></pre>
-</li>
-<li><p><strong>Explanation:</strong></p>
-<ul>
-<li>By depending on the <code>PaymentGatewayInterface</code>, the <code>OrderController</code> is loosely coupled to the payment gateway implementation. Changes to the payment gateway do not affect the controller, adhering to the Low Coupling principle.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="-5-high-cohesion-"><strong>5. High Cohesion</strong></h3>
-<ul>
-<li><p><strong>Definition:</strong> Assign responsibilities so that related behaviors are kept together, promoting focused and manageable classes.</p>
-</li>
-<li><p><strong>Laravel Example:</strong> <strong>Eloquent Models with Business Logic</strong></p>
-<ul>
-<li><p><strong>Description:</strong></p>
-<ul>
-<li>Models encapsulate not only data but also behaviors directly related to that data, such as custom methods and attribute accessors.</li>
-</ul>
-</li>
-<li><p><strong>Example:</strong></p>
-<pre><code class="lang-php"><span class="hljs-comment">// app/Models/Product.php</span>
-<span class="hljs-keyword">namespace</span> <span class="hljs-title">App</span>\<span class="hljs-title">Models</span>;
+                </li>
+                <li>
+                    <p><strong>Example (Facade):</strong></p>
+                    <pre><code class="lang-php">// Using the Cache facade
+Cache::put('key', 'value', $minutes);
+$value = Cache::get('key');
+</code></pre>
+                </li>
+                <li>
+                    <p><strong>Explanation:</strong></p>
+                    <ul>
+                        <li>By depending on interfaces (contracts) and using facades, the application is protected from changes in the underlying implementations of services like caching, logging, etc.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
 
-<span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Database</span>\<span class="hljs-title">Eloquent</span>\<span class="hljs-title">Model</span>;
+    <h3 id="-5-high-cohesion-"><strong>5. High Cohesion</strong></h3>
+    <ul>
+        <li>
+            <p><strong>Definition:</strong> Assign responsibilities so that related behaviors are kept together, promoting focused and manageable classes.</p>
+        </li>
+        <li>
+            <p><strong>Laravel Example:</strong> <strong>Eloquent Models with Business Logic</strong></p>
+            <ul>
+                <li>
+                    <p><strong>Description:</strong></p>
+                    <ul>
+                        <li>Models encapsulate not only data but also behaviors directly related to that data, such as custom methods and attribute accessors.</li>
+                    </ul>
+                </li>
+                <li>
+                    <p><strong>Example:</strong></p>
+                    <pre><code class="lang-php">// app/Models/Product.php
+namespace App\Models;
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Product</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Model</span>
-</span>{
-    <span class="hljs-comment">// Attribute accessor</span>
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getPriceAttribute</span><span class="hljs-params">($value)</span>
-    </span>{
-        <span class="hljs-keyword">return</span> $value / <span class="hljs-number">100</span>; <span class="hljs-comment">// Convert cents to dollars</span>
+use Illuminate\Database\Eloquent\Model;
+
+class Product extends Model
+{
+    // Attribute accessor
+    public function getPriceAttribute($value)
+    {
+        return $value / 100; // Convert cents to dollars
     }
 
-    <span class="hljs-comment">// Business logic method</span>
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isInStock</span><span class="hljs-params">()</span>
-    </span>{
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">$this</span>-&gt;stock_quantity &gt; <span class="hljs-number">0</span>;
+    // Business logic method
+    public function isInStock()
+    {
+        return $this->stock_quantity > 0;
     }
 }
 </code></pre>
-</li>
-<li><p><strong>Explanation:</strong></p>
-<ul>
-<li>The <code>Product</code> model groups related data and behaviors, maintaining high cohesion by focusing on product-related responsibilities.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="-6-polymorphism-"><strong>6. Polymorphism</strong></h3>
-<ul>
-<li><p><strong>Definition:</strong> Use polymorphic operations to handle alternatives based on type, promoting flexibility and extensibility.</p>
-</li>
-<li><p><strong>Laravel Example:</strong> <strong>Polymorphic Relationships and Contracts</strong></p>
-<ul>
-<li><p><strong>Description:</strong></p>
-<ul>
-<li>Laravel&#39;s polymorphic relationships allow models to belong to more than one type of model using a single association.</li>
-<li>Interfaces and contracts enable different classes to be used interchangeably if they implement the same interface.</li>
-</ul>
-</li>
-<li><p><strong>Example (Polymorphic Relationship):</strong></p>
-<pre><code class="lang-php"><span class="hljs-comment">// app/Models/Comment.php</span>
-<span class="hljs-keyword">namespace</span> <span class="hljs-title">App</span>\<span class="hljs-title">Models</span>;
+                </li>
+                <li>
+                    <p><strong>Explanation:</strong></p>
+                    <ul>
+                        <li>The <code>Product</code> model groups related data and behaviors, maintaining high cohesion by focusing on product-related responsibilities.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
 
-<span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Database</span>\<span class="hljs-title">Eloquent</span>\<span class="hljs-title">Model</span>;
+    <h3 id="-6-polymorphism-"><strong>6. Polymorphism</strong></h3>
+    <ul>
+        <li>
+            <p><strong>Definition:</strong> Use polymorphic operations to handle alternatives based on type, promoting flexibility and extensibility.</p>
+        </li>
+        <li>
+            <p><strong>Laravel Example:</strong> <strong>Polymorphic Relationships and Contracts</strong></p>
+            <ul>
+                <li>
+                    <p><strong>Description:</strong></p>
+                    <ul>
+                        <li>Laravel's polymorphic relationships allow models to belong to more than one type of model using a single association.</li>
+                        <li>Interfaces and contracts enable different classes to be used interchangeably if they implement the same interface.</li>
+                    </ul>
+                </li>
+                <li>
+                    <p><strong>Example (Polymorphic Relationship):</strong></p>
+                    <pre><code class="lang-php">// app/Models/Comment.php
+namespace App\Models;
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Comment</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Model</span>
-</span>{
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">commentable</span><span class="hljs-params">()</span>
-    </span>{
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">$this</span>-&gt;morphTo();
+use Illuminate\Database\Eloquent\Model;
+
+class Comment extends Model
+{
+    public function commentable()
+    {
+        return $this->morphTo();
     }
 }
 
-<span class="hljs-comment">// app/Models/Post.php</span>
-<span class="hljs-keyword">namespace</span> <span class="hljs-title">App</span>\<span class="hljs-title">Models</span>;
+// app/Models/Post.php
+namespace App\Models;
 
-<span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Database</span>\<span class="hljs-title">Eloquent</span>\<span class="hljs-title">Model</span>;
+use Illuminate\Database\Eloquent\Model;
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Post</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Model</span>
-</span>{
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">comments</span><span class="hljs-params">()</span>
-    </span>{
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">$this</span>-&gt;morphMany(Comment::class, <span class="hljs-string">'commentable'</span>);
+class Post extends Model
+{
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }
 
-<span class="hljs-comment">// app/Models/Video.php</span>
-<span class="hljs-keyword">namespace</span> <span class="hljs-title">App</span>\<span class="hljs-title">Models</span>;
+// app/Models/Video.php
+namespace App\Models;
 
-<span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Database</span>\<span class="hljs-title">Eloquent</span>\<span class="hljs-title">Model</span>;
+use Illuminate\Database\Eloquent\Model;
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Video</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Model</span>
-</span>{
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">comments</span><span class="hljs-params">()</span>
-    </span>{
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">$this</span>-&gt;morphMany(Comment::class, <span class="hljs-string">'commentable'</span>);
+class Video extends Model
+{
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }
 
-<span class="hljs-comment">// Usage</span>
-$post = Post::find(<span class="hljs-number">1</span>);
-$post-&gt;comments()-&gt;create([<span class="hljs-string">'content'</span> =&gt; <span class="hljs-string">'Great post!'</span>]);
+// Usage
+$post = Post::find(1);
+$post->comments()->create(['content' => 'Great post!']);
 
-$video = Video::find(<span class="hljs-number">1</span>);
-$video-&gt;comments()-&gt;create([<span class="hljs-string">'content'</span> =&gt; <span class="hljs-string">'Nice video!'</span>]);
+$video = Video::find(1);
+$video->comments()->create(['content' => 'Nice video!']);
 </code></pre>
-</li>
-<li><p><strong>Explanation:</strong></p>
-<ul>
-<li>The <code>Comment</code> model can be associated with both <code>Post</code> and <code>Video</code> models, demonstrating polymorphism in relationships.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="-7-pure-fabrication-"><strong>7. Pure Fabrication</strong></h3>
-<ul>
-<li><p><strong>Definition:</strong> Assign responsibilities to a class that does not represent a concept in the problem domain but is created to achieve low coupling and high cohesion.</p>
-</li>
-<li><p><strong>Laravel Example:</strong> <strong>Service Classes</strong></p>
-<ul>
-<li><p><strong>Description:</strong></p>
-<ul>
-<li>Service classes encapsulate business logic that doesn&#39;t fit within models or controllers, often used for complex operations.</li>
-</ul>
-</li>
-<li><p><strong>Example:</strong></p>
-<pre><code class="lang-php"><span class="hljs-comment">// app/Services/ReportGenerator.php</span>
-<span class="hljs-keyword">namespace</span> <span class="hljs-title">App</span>\<span class="hljs-title">Services</span>;
+                </li>
+                <li>
+                    <p><strong>Explanation:</strong></p>
+                    <ul>
+                        <li>The <code>Comment</code> model can be associated with both <code>Post</code> and <code>Video</code> models, demonstrating polymorphism in relationships.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
 
-<span class="hljs-keyword">use</span> <span class="hljs-title">App</span>\<span class="hljs-title">Models</span>\<span class="hljs-title">Order</span>;
+    <h3 id="-7-pure-fabrication-"><strong>7. Pure Fabrication</strong></h3>
+    <ul>
+        <li>
+            <p><strong>Definition:</strong> Assign responsibilities to a class that does not represent a concept in the problem domain but is created to achieve low coupling and high cohesion.</p>
+        </li>
+        <li>
+            <p><strong>Laravel Example:</strong> <strong>Service Classes</strong></p>
+            <ul>
+                <li>
+                    <p><strong>Description:</strong></p>
+                    <ul>
+                        <li>Service classes encapsulate business logic that doesn't fit within models or controllers, often used for complex operations.</li>
+                    </ul>
+                </li>
+                <li>
+                    <p><strong>Example:</strong></p>
+                    <pre><code class="lang-php">// app/Services/ReportGenerator.php
+namespace App\Services;
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ReportGenerator</span>
-</span>{
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">generateMonthlySalesReport</span><span class="hljs-params">()</span>
-    </span>{
-        $salesData = Order::whereMonth(<span class="hljs-string">'created_at'</span>, date(<span class="hljs-string">'m'</span>))
-            -&gt;sum(<span class="hljs-string">'total'</span>);
+use App\Models\Order;
 
-        <span class="hljs-comment">// Generate report logic</span>
+class ReportGenerator
+{
+    public function generateMonthlySalesReport()
+    {
+        $salesData = Order::whereMonth('created_at', date('m'))
+            ->sum('total');
+
+        // Generate report logic
     }
 }
 
-<span class="hljs-comment">// Usage in a controller</span>
+// Usage in a controller
 $reportGenerator = app(ReportGenerator::class);
-$reportGenerator-&gt;generateMonthlySalesReport();
+$reportGenerator->generateMonthlySalesReport();
 </code></pre>
-</li>
-<li><p><strong>Explanation:</strong></p>
-<ul>
-<li><code>ReportGenerator</code> is a pure fabrication; it doesn&#39;t represent a domain entity but provides a cohesive set of operations related to report generation, promoting separation of concerns.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="-8-indirection-"><strong>8. Indirection</strong></h3>
-<ul>
-<li><p><strong>Definition:</strong> Assign responsibilities to intermediate objects to mediate between other components, reducing coupling.</p>
-</li>
-<li><p><strong>Laravel Example:</strong> <strong>Middleware and Events</strong></p>
-<ul>
-<li><p><strong>Description:</strong></p>
-<ul>
-<li>Middleware acts as an intermediary between HTTP requests and application logic.</li>
-<li>Event listeners and subscribers decouple event producers from consumers.</li>
-</ul>
-</li>
-<li><p><strong>Example (Middleware):</strong></p>
-<pre><code class="lang-php"><span class="hljs-comment">// app/Http/Middleware/Authenticate.php</span>
-<span class="hljs-keyword">namespace</span> <span class="hljs-title">App</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Middleware</span>;
+                </li>
+                <li>
+                    <p><strong>Explanation:</strong></p>
+                    <ul>
+                        <li><code>ReportGenerator</code> is a pure fabrication; it doesn't represent a domain entity but provides a cohesive set of operations related to report generation, promoting separation of concerns.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
 
-<span class="hljs-keyword">use</span> <span class="hljs-title">Closure</span>;
-<span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Support</span>\<span class="hljs-title">Facades</span>\<span class="hljs-title">Auth</span>;
+    <h3 id="-8-indirection-"><strong>8. Indirection</strong></h3>
+    <ul>
+        <li>
+            <p><strong>Definition:</strong> Assign responsibilities to intermediate objects to mediate between other components, reducing coupling.</p>
+        </li>
+        <li>
+            <p><strong>Laravel Example:</strong> <strong>Middleware and Events</strong></p>
+            <ul>
+                <li>
+                    <p><strong>Description:</strong></p>
+                    <ul>
+                        <li>Middleware acts as an intermediary between HTTP requests and application logic.</li>
+                        <li>Event listeners and subscribers decouple event producers from consumers.</li>
+                    </ul>
+                </li>
+                <li>
+                    <p><strong>Example (Middleware):</strong></p>
+                    <pre><code class="lang-php">// app/Http/Middleware/Authenticate.php
+namespace App\Http\Middleware;
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Authenticate</span>
-</span>{
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handle</span><span class="hljs-params">($request, Closure $next)</span>
-    </span>{
-        <span class="hljs-keyword">if</span> (Auth::check()) {
-            <span class="hljs-keyword">return</span> $next($request);
+use Closure;
+use Illuminate\Support\Facades\Auth;
+
+class Authenticate
+{
+    public function handle($request, Closure $next)
+    {
+        if (Auth::check()) {
+            return $next($request);
         }
 
-        <span class="hljs-keyword">return</span> redirect(<span class="hljs-string">'login'</span>);
+        return redirect('login');
     }
 }
 </code></pre>
-</li>
-<li><p><strong>Example (Event):</strong></p>
-<pre><code class="lang-php"><span class="hljs-comment">// app/Events/UserRegistered.php</span>
-<span class="hljs-keyword">namespace</span> <span class="hljs-title">App</span>\<span class="hljs-title">Events</span>;
+                </li>
+                <li>
+                    <p><strong>Example (Event):</strong></p>
+                    <pre><code class="lang-php">// app/Events/UserRegistered.php
+namespace App\Events;
 
-<span class="hljs-keyword">use</span> <span class="hljs-title">App</span>\<span class="hljs-title">Models</span>\<span class="hljs-title">User</span>;
-<span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Queue</span>\<span class="hljs-title">SerializesModels</span>;
+use App\Models\User;
+use Illuminate\Queue\SerializesModels;
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserRegistered</span>
-</span>{
-    <span class="hljs-keyword">use</span> <span class="hljs-title">SerializesModels</span>;
+class UserRegistered
+{
+    use SerializesModels;
 
-    <span class="hljs-keyword">public</span> $user;
+    public $user;
 
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span><span class="hljs-params">(User $user)</span>
-    </span>{
-        <span class="hljs-keyword">$this</span>-&gt;user = $user;
+    public function __construct(User $user)
+    {
+        $this->user = $user;
     }
 }
 
-<span class="hljs-comment">// app/Listeners/SendWelcomeEmail.php</span>
-<span class="hljs-keyword">namespace</span> <span class="hljs-title">App</span>\<span class="hljs-title">Listeners</span>;
+// app/Listeners/SendWelcomeEmail.php
+namespace App\Listeners;
 
-<span class="hljs-keyword">use</span> <span class="hljs-title">App</span>\<span class="hljs-title">Events</span>\<span class="hljs-title">UserRegistered</span>;
-<span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Contracts</span>\<span class="hljs-title">Queue</span>\<span class="hljs-title">ShouldQueue</span>;
-<span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Queue</span>\<span class="hljs-title">InteractsWithQueue</span>;
-<span class="hljs-keyword">use</span> <span class="hljs-title">Mail</span>;
+use App\Events\UserRegistered;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Mail;
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SendWelcomeEmail</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ShouldQueue</span>
-</span>{
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handle</span><span class="hljs-params">(UserRegistered $event)</span>
-    </span>{
-        Mail::to($event-&gt;user-&gt;email)-&gt;send(<span class="hljs-keyword">new</span> WelcomeEmail($event-&gt;user));
+class SendWelcomeEmail implements ShouldQueue
+{
+    public function handle(UserRegistered $event)
+    {
+        Mail::to($event->user->email)->send(new WelcomeEmail($event->user));
     }
 }
 
-<span class="hljs-comment">// app/Providers/EventServiceProvider.php</span>
-<span class="hljs-keyword">protected</span> $listen = [
-    UserRegistered::class =&gt; [
+// app/Providers/EventServiceProvider.php
+protected $listen = [
+    UserRegistered::class => [
         SendWelcomeEmail::class,
     ],
 ];
 </code></pre>
-</li>
-<li><p><strong>Explanation:</strong></p>
-<ul>
-<li>Middleware and event listeners act as layers of indirection, decoupling the core application logic from cross-cutting concerns like authentication and notification.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="-9-protected-variations-"><strong>9. Protected Variations</strong></h3>
-<ul>
-<li><p><strong>Definition:</strong> Identify points of predicted variation and create a stable interface around them to protect the rest of the system from the variations.</p>
-</li>
-<li><p><strong>Laravel Example:</strong> <strong>Contracts and Facades</strong></p>
-<ul>
-<li><p><strong>Description:</strong></p>
-<ul>
-<li>Laravel&#39;s contracts (interfaces) define stable abstractions that can be implemented by various concrete classes.</li>
-<li>Facades provide a consistent interface to underlying implementations, shielding the application from changes.</li>
-</ul>
-</li>
-<li><p><strong>Example (Contract):</strong></p>
-<pre><code class="lang-php"><span class="hljs-comment">// Illuminate\Contracts\Cache\Store</span>
+                </li>
+                <li>
+                    <p><strong>Explanation:</strong></p>
+                    <ul>
+                        <li>Middleware and event listeners act as layers of indirection, decoupling the core application logic from cross-cutting concerns like authentication and notification.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
 
-<span class="hljs-comment">// Usage</span>
-<span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Contracts</span>\<span class="hljs-title">Cache</span>\<span class="hljs-title">Factory</span> <span class="hljs-title">as</span> <span class="hljs-title">CacheFactory</span>;
+    <h3 id="-9-protected-variations-"><strong>9. Protected Variations</strong></h3>
+    <ul>
+        <li>
+            <p><strong>Definition:</strong> Identify points of predicted variation and create a stable interface around them to protect the rest of the system from the variations.</p>
+        </li>
+        <li>
+            <p><strong>Laravel Example:</strong> <strong>Contracts and Facades</strong></p>
+            <ul>
+                <li>
+                    <p><strong>Description:</strong></p>
+                    <ul>
+                        <li>Laravel's contracts (interfaces) define stable abstractions that can be implemented by various concrete classes.</li>
+                        <li>Facades provide a consistent interface to underlying implementations, shielding the application from changes.</li>
+                    </ul>
+                </li>
+                <li>
+                    <p><strong>Example (Contract):</strong></p>
+                    <pre><code class="lang-php">// Illuminate\Contracts\Cache\Store
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SomeClass</span>
-</span>{
-    <span class="hljs-keyword">protected</span> $cache;
+// Usage
+use Illuminate\Contracts\Cache\Factory as CacheFactory;
 
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span><span class="hljs-params">(CacheFactory $cache)</span>
-    </span>{
-        <span class="hljs-keyword">$this</span>-&gt;cache = $cache;
+class SomeClass
+{
+    protected $cache;
+
+    public function __construct(CacheFactory $cache)
+    {
+        $this->cache = $cache;
     }
 
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getData</span><span class="hljs-params">()</span>
-    </span>{
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">$this</span>-&gt;cache-&gt;get(<span class="hljs-string">'key'</span>);
+    public function getData()
+    {
+        return $this->cache->get('key');
     }
 }
 </code></pre>
-</li>
-<li><p><strong>Example (Facade):</strong></p>
-<pre><code class="lang-php"><span class="hljs-comment">// Using the Cache facade</span>
-<span class="hljs-keyword">Cache</span><span class="hljs-type">::put</span>(<span class="hljs-string">'key'</span>, <span class="hljs-string">'value'</span>, $minutes);
-$value = <span class="hljs-keyword">Cache</span><span class="hljs-type">::get</span>(<span class="hljs-string">'key'</span>);
+                </li>
+                <li>
+                    <p><strong>Example (Facade):</strong></p>
+                    <pre><code class="lang-php">// Using the Cache facade
+Cache::put('key', 'value', $minutes);
+$value = Cache::get('key');
 </code></pre>
-</li>
-<li><p><strong>Explanation:</strong></p>
-<ul>
-<li>By coding against interfaces (contracts) and using facades, the application is protected from changes in the underlying implementations of services like caching, logging, etc.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="-summary-"><strong>Summary</strong></h2>
-<p>By applying the <strong>GRASP patterns</strong>, Laravel promotes:</p>
-<ul>
-<li><strong>Clear Responsibility Assignment:</strong> Ensuring classes and objects have well-defined responsibilities.</li>
-<li><strong>Low Coupling and High Cohesion:</strong> Making the codebase easier to maintain and scale.</li>
-<li><strong>Flexibility and Extensibility:</strong> Allowing the application to adapt to changes with minimal impact.</li>
-</ul>
-<p>Understanding how these patterns manifest in Laravel helps developers write better, more maintainable code by following established design principles.</p>
-<hr>
-<h2 id="-additional-notes-"><strong>Additional Notes</strong></h2>
-<ul>
-<li><strong>Separation of Concerns:</strong> Laravel encourages separating different aspects of the application (e.g., models, views, controllers, services), aligning with the High Cohesion principle.</li>
-<li><strong>Dependency Injection:</strong> Widely used in Laravel to inject dependencies, promoting Low Coupling.</li>
-<li><strong>Event-Driven Architecture:</strong> Laravel&#39;s events and listeners facilitate Indirection and Protected Variations.</li>
-<li><strong>Reusable Components:</strong> By adhering to these principles, Laravel components are reusable and interchangeable.</li>
-</ul>
-<hr>
-<h2 id="-references-"><strong>References</strong></h2>
-<ul>
-<li><strong>Laravel Documentation:</strong> <a href="https://laravel.com/docs">https://laravel.com/docs</a></li>
-<li><strong>GRASP Patterns Overview:</strong> <a href="https://en.wikipedia.org/wiki/GRASP_(object-oriented_design">GRASP (object-oriented design) - Wikipedia</a>)</li>
-<li><strong>Design Patterns in Laravel:</strong> <a href="https://laracasts.com/series/design-patterns-in-php">Laracasts Series - Design Patterns in PHP</a></li>
-<li><strong>Find How</strong> <a href="https://find.how">Find How</a></li>
-<li><strong>Clean Code Studio:</strong> <a href="https://cleancode.studio">Design Patterns</a></li>
-<li><strong>Find How Deno Packages:</strong> <a href="https://jsr.io/@findhow">jsr:@findhow/*</a></li>
-</ul>
+                </li>
+                <li>
+                    <p><strong>Explanation:</strong></p>
+                    <ul>
+                        <li>By coding against interfaces (contracts) and using facades, the application is protected from changes in the underlying implementations of services like caching, logging, etc.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <hr>
+    <h2 id="-summary-"><strong>Summary</strong></h2>
+    <p>By applying the <strong>GRASP patterns</strong>, Laravel promotes:</p>
+    <ul>
+        <li><strong>Clear Responsibility Assignment:</strong> Ensuring classes and objects have well-defined responsibilities.</li>
+        <li><strong>Low Coupling and High Cohesion:</strong> Making the codebase easier to maintain and scale.</li>
+        <li><strong>Flexibility and Extensibility:</strong> Allowing the application to adapt to changes with minimal impact.</li>
+    </ul>
+    <p>Understanding how these patterns manifest in Laravel helps developers write better, more maintainable code by following established design principles.</p>
+    <hr>
+    <h2 id="-additional-notes-"><strong>Additional Notes</strong></h2>
+    <ul>
+        <li><strong>Separation of Concerns:</strong> Laravel encourages separating different aspects of the application (e.g., models, views, controllers, services), aligning with the High Cohesion principle.</li>
+        <li><strong>Dependency Injection:</strong> Widely used in Laravel to inject dependencies, promoting Low Coupling.</li>
+        <li><strong>Event-Driven Architecture:</strong> Laravel's events and listeners facilitate Indirection and Protected Variations.</li>
+        <li><strong>Reusable Components:</strong> By adhering to these principles, Laravel components are reusable and interchangeable.</li>
+    </ul>
+    <hr>
+    <h2 id="-references-"><strong>References</strong></h2>
+    <ul>
+        <li><strong>Laravel Documentation:</strong> <a href="https://laravel.com/docs">https://laravel.com/docs</a></li>
+        <li><strong>GRASP Patterns Overview:</strong> <a href="https://en.wikipedia.org/wiki/GRASP_(object-oriented_design)">GRASP (object-oriented design) - Wikipedia</a></li>
+        <li><strong>Design Patterns in Laravel:</strong> <a href="https://laracasts.com/series/design-patterns-in-php">Laracasts Series - Design Patterns in PHP</a></li>
+        <li><strong>Find How:</strong> <a href="https://find.how">Find How</a></li>
+        <li><strong>Clean Code Studio:</strong> <a href="https://cleancode.studio">Design Patterns</a></li>
+        <li><strong>Find How Deno Packages:</strong> <a href="https://jsr.io/@findhow">jsr:@findhow/*</a></li>
+    </ul>
+</body>
+</html>
